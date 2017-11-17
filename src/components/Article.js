@@ -12,10 +12,9 @@ class Article extends Component {
 
     render() {
         const {article} = this.props;
-
         const body = this.state.isOpen
-                            ? this.props.content
-                            : 'not available';
+                            ? article.text
+                            : 'hidden text';
         return (
             <article>
                 <h2 onClick={this.handleClick}>{article.title}</h2>
@@ -27,7 +26,6 @@ class Article extends Component {
     }
 
     handleClick = (e) => {
-        console.log(e, 'here');
         this.setState({
             isOpen: !this.state.isOpen
         });

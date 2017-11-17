@@ -1,21 +1,13 @@
 import React, {Component} from 'react';
 import Article from './Article';
 
-class ArticleList extends Component {
-    constructor() {
-        super();
-    }
+export default (props) => {
+    const {articles} = props;
+    const articleComponents = articles.map(article => <li key={article.id}><Article article={article} /></li>);
 
-    render() {
-        const {articles} = this.props;
-        const articleComponents = articles.map(article => <li key={article.id}><Article article={article} /></li>);
-
-        return (
-            <ul>
-                {articleComponents}
-            </ul>
-        );
-    }
+    return (
+        <ul>
+            {articleComponents}
+        </ul>
+    );
 }
-
-export default ArticleList;
