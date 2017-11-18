@@ -1,16 +1,38 @@
-import React from 'react';
+import React, {Component} from 'react';
 import Comment from './Comment';
 
-export default (props) => {
-    const {comments} = props;
+class CommentList extends Component {
+    constructor() {
+        super();
+        this.state = {
+            isOpened: false
+        };
+    }
 
-    const commentComponent = comments.map(comment => {
-        return <li key={comment.id}><Comment comment={comment} /></li>
-    });
+    render() {
+        const {comments} = this.props;
+        const {isOpened} = this.state;
 
-    return (
-        <ul>
-            {commentComponent}
-        </ul>
-    );
+        const commentTemplate = comments ? comments.map(comment => <Comment key={comment.id} comment={comment}></Comment>) : '';
+        const commentContent = commentTemplate || (<div>No comments</div>);
+        const commentSection = isOpened ? (
+            <div>
+                <h3>Comments</h3>
+                {commentContent}
+            </div>
+        ) : '';
+
+        return (<div>
+            <button onClick={this.toggleList}>{isOpened ? 'Hide comments' : 'Show comments'}</button>
+            {commentSection}
+        </div>);
+    }
+
+    toggleList = () => {
+        this.setState({
+            isOpened: !this.state.isOpened
+        });
+    }
 }
+
+export default CommentList;
