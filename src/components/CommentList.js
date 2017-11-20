@@ -1,27 +1,58 @@
 import React, {Component} from 'react';
 import Comment from './Comment';
+import toggleOpen from '../decorators/toggleOpen';
 
 class CommentList extends Component {
     static defaultProps = {
         comments: []
     };
 
-    state = {
-        isOpen: false
-    };
+    constructor() {
+        super();
+        //this.getContainerRef = this.getContainerRef.bind(this);
+    }
+
+    componentWillMount() {
+        console.log('CommentList componentWillMount()');
+    }
+
+    componentDidMount() {
+        console.log('CommentList componentDidMount()');
+    }
+
+    componentWillUpdate() {
+        console.log('CommentList componentWillUpdate()');
+    }
+
+    componentDidUpdate() {
+        console.log('CommentList componentDidUpdate()');
+        this.size = this.container.getBoundingClientRect();
+Вусщкфе
+        console.log(this.size);
+    }
 
     render() {
-        const {isOpen} = this.state;
+        const {isOpen, toggleOpen} = this.props;
 
         return (
-            <div>
+            <div ref={this.getContainerRef}>
+                <h2>Comments</h2>
+                <button onClick={toggleOpen}>{isOpen ? 'Hide' : 'Show'} comments</button>
                 {this.getBody()}
-                <button onClick={this.toggleList}>{isOpen ? 'Hide' : 'Show'} comments</button>
             </div>);
     }
 
+    getContainerRef = (ref) => {
+        this.container = ref;
+        if (ref) {
+            this.size = ref.getBoundingClientRect();
+
+            console.log(this.size);
+        }
+    };
+
     getBody() {
-        if (!this.state.isOpen) {
+        if (!this.props.isOpen) {
             return '';
         }
 
@@ -41,13 +72,6 @@ class CommentList extends Component {
           </div>
         );
     }
-
-    toggleList = (ev) => {
-        ev.preventDefault();
-        this.setState({
-            isOpen: !this.state.isOpen
-        });
-    }
 }
 
-export default CommentList;
+export default toggleOpen(CommentList);
