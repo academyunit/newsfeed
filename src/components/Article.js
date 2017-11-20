@@ -13,7 +13,10 @@ class Article extends Component {
         const {article} = this.props;
         const {isOpen} = this.state;
         const body = isOpen
-                        ? <div><section className="post__content">{article.text}</section><CommentList comments={article.comments} /></div>
+                        ? <section className="post__content">
+                            {article.text}
+                            <CommentList comments={article.comments}/>
+                          </section>
                         : '';
 
         return (

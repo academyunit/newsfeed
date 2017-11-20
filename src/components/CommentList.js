@@ -2,35 +2,50 @@ import React, {Component} from 'react';
 import Comment from './Comment';
 
 class CommentList extends Component {
-    constructor() {
-        super();
-        this.state = {
-            isOpened: false
-        };
-    }
+    static defaultProps = {
+        comments: []
+    };
+
+    state = {
+        isOpen: false
+    };
 
     render() {
-        const {comments} = this.props;
-        const {isOpened} = this.state;
+        const {isOpen} = this.state;
 
-        const commentTemplate = comments ? comments.map(comment => <Comment key={comment.id} comment={comment}></Comment>) : '';
-        const commentContent = commentTemplate || (<div>No comments</div>);
-        const commentSection = isOpened ? (
+        return (
             <div>
-                <h3>Comments</h3>
-                {commentContent}
-            </div>
-        ) : '';
-
-        return (<div>
-            <button onClick={this.toggleList}>{isOpened ? 'Hide comments' : 'Show comments'}</button>
-            {commentSection}
-        </div>);
+                {this.getBody()}
+                <button onClick={this.toggleList}>{isOpen ? 'Hide' : 'Show'} comments</button>
+            </div>);
     }
 
-    toggleList = () => {
+    getBody() {
+        if (!this.state.isOpen) {
+            return '';
+        }
+
+        const {comments} = this.props;
+        if (!comments.length) {
+            return (<div>
+                <h3>No comments yet</h3>
+            </div>);
+        }
+
+        const commentItems = comments.map(comment => <li key={comment.id}><Comment comment={comment}/></li>);
+        return (
+          <div>
+              <ul>
+                  {commentItems}
+              </ul>
+          </div>
+        );
+    }
+
+    toggleList = (ev) => {
+        ev.preventDefault();
         this.setState({
-            isOpened: !this.state.isOpened
+            isOpen: !this.state.isOpen
         });
     }
 }

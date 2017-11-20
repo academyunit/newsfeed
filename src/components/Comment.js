@@ -1,20 +1,14 @@
 import React, {Component} from 'react';
 
-class Comment extends Component {
-    constructor() {
-        super();
-    };
+function Comment (props) {
+    const {user, text} = props.comment;
 
-    render() {
-        const {comment} = this.props;
-
-        return (
-            <section className="comment">
-                <h2 className="comment__name">{comment.user}</h2>
-                <article className="comment__text">{comment.text}</article>
-            </section>
-        );
-    };
+    return (
+        <section className="comment">
+            <h2 className="comment__name">{user}</h2>
+            <article className="comment__text">{text}</article>
+        </section>
+    );
 }
 
 export default Comment;
