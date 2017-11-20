@@ -8,9 +8,7 @@ class CommentList extends Component {
     };
 
     static propTypes = {
-        comments: PropTypes.array.isRequired,
-        isOpen: PropTypes.bool.isRequired,
-        toggleOpen: PropTypes.func.isRequired
+        comments: PropTypes.array.isRequired
     };
 
     componentWillMount() {

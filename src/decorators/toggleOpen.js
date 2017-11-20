@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-export default (CustomComponent) => class DecoratedComponent extends Component {
+export default (CustomComponent) => class toggleDecorator extends Component {
   state = {
     isOpen: false
   };
