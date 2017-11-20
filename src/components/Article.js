@@ -27,4 +27,4 @@ Article.propTypes = {
   }).isRequired
 };
 
-export default toggleOpen(Article);
+export default Article;

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import Comment from './Comment';
 import toggleOpen from '../decorators/toggleOpen';
 
@@ -7,10 +7,11 @@ class CommentList extends Component {
         comments: []
     };
 
-    constructor() {
-        super();
-        //this.getContainerRef = this.getContainerRef.bind(this);
-    }
+    static propTypes = {
+        comments: PropTypes.array.isRequired,
+        isOpen: PropTypes.bool.isRequired,
+        toggleOpen: PropTypes.func.isRequired
+    };
 
     componentWillMount() {
         console.log('CommentList componentWillMount()');
@@ -26,8 +27,10 @@ class CommentList extends Component {
 
     componentDidUpdate() {
         console.log('CommentList componentDidUpdate()');
-        this.size = this.container.getBoundingClientRect();
-Вусщкфе
+        this.size = this
+          .container
+          .getBoundingClientRect();
+
         console.log(this.size);
     }
 
@@ -35,11 +38,11 @@ class CommentList extends Component {
         const {isOpen, toggleOpen} = this.props;
 
         return (
-            <div ref={this.getContainerRef}>
-                <h2>Comments</h2>
-                <button onClick={toggleOpen}>{isOpen ? 'Hide' : 'Show'} comments</button>
-                {this.getBody()}
-            </div>);
+          <div ref={this.getContainerRef}>
+              <h2>Comments</h2>
+              <button onClick={toggleOpen}>{isOpen ? 'Hide' : 'Show'} comments</button>
+              {this.getBody()}
+          </div>);
     }
 
     getContainerRef = (ref) => {

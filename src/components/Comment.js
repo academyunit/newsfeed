@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 
 function Comment (props) {
     const {user, text} = props.comment;
@@ -10,5 +10,12 @@ function Comment (props) {
         </section>
     );
 }
+
+Comment.propTypes = {
+  comment: PropTypes.shape({
+    user: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired
+  }).isRequired
+};
 
 export default Comment;
