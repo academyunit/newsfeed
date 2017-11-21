@@ -10,7 +10,9 @@ export default (CustomComponent) => class AccordionDecorator extends Component {
       ev.preventDefault();
     }
 
-    this.setState({openItemId});
+    this.setState({
+      openItemId: this.isItemOpened(openItemId) ? null: openItemId
+    });
   };
 
   isItemOpened = id => id == this.state.openItemId;
