@@ -1,22 +1,33 @@
 import React, {Component, PropTypes} from 'react';
+import {findDOMNode} from 'react-dom';
 import CommentList from './CommentList';
 import toggleOpen from '../decorators/toggleOpen';
 
-function Article(props) {
-  const {article, isOpen, toggleOpen} = props;
-  const body = isOpen
-    ? <section className="post__content">
-    {article.text}
-    <CommentList comments={article.comments}/>
-  </section>
-    : '';
+class Article extends Component {
+  render() {
+    const {article, isOpen, toggleOpen} = this.props;
+    const body = isOpen
+      ? <section className="post__content">
+      {article.text}
+      <CommentList comments={article.comments} ref={this.getCommentsList}/>
+    </section>
+      : '';
 
-  return (
-    <article className="post">
-      <h2 className="post__title" onClick={toggleOpen}>{article.title}</h2>
-      {body}
-    </article>
-  );
+    return (
+      <article className="post">
+        <h2 className="post__title" onClick={toggleOpen}>{article.title}</h2>
+        {body}
+      </article>
+    );
+  };
+
+  getCommentsList = ref => {
+    this.commentsList = ref;
+  };
+
+  componentDidUpdate() {
+    //console.log('---', findDOMNode(this.commentsList));
+  }
 }
 
 Article.propTypes = {

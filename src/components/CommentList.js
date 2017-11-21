@@ -12,24 +12,24 @@ class CommentList extends Component {
     };
 
     componentWillMount() {
-        console.log('CommentList componentWillMount()');
+        //console.log('CommentList componentWillMount()');
     }
 
     componentDidMount() {
-        console.log('CommentList componentDidMount()');
+        //console.log('CommentList componentDidMount()');
     }
 
     componentWillUpdate() {
-        console.log('CommentList componentWillUpdate()');
+        //console.log('CommentList componentWillUpdate()');
     }
 
     componentDidUpdate() {
-        console.log('CommentList componentDidUpdate()');
+        //console.log('CommentList componentDidUpdate()');
         this.size = this
           .container
           .getBoundingClientRect();
 
-        console.log(this.size);
+        //console.log(this.size);
     }
 
     render() {
@@ -48,7 +48,7 @@ class CommentList extends Component {
         if (ref) {
             this.size = ref.getBoundingClientRect();
 
-            console.log(this.size);
+            //console.log(this.size);
         }
     };
 
