@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import ArticleList from './ArticleList';
+import ArticleList from './ArticleList/index';
 import Chart from './Chart';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';

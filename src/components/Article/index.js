@@ -1,7 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import {findDOMNode} from 'react-dom';
-import CommentList from './CommentList';
-import toggleOpen from '../decorators/toggleOpen';
+import CommentList from './../CommentList';
+import toggleOpen from '../../decorators/toggleOpen';
+import CSSTransition from 'react-addons-css-transition-group';
 
 class Article extends Component {
   render() {
@@ -16,7 +17,13 @@ class Article extends Component {
     return (
       <article className="post">
         <h2 className="post__title" onClick={toggleOpen}>{article.title}</h2>
-        {body}
+        <CSSTransition
+          transitionName="article"
+          transitionEnterTimeout={1500}
+          transitionLeaveTimeout={1500}
+        >
+          {body}
+        </CSSTransition>
       </article>
     );
   };
