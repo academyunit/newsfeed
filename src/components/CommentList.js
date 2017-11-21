@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import Comment from './Comment';
 import toggleOpen from '../decorators/toggleOpen';
+import CommentForm from './CommentForm';
 
 class CommentList extends Component {
     static defaultProps = {
@@ -40,8 +41,18 @@ class CommentList extends Component {
               <h2>Comments</h2>
               <button onClick={toggleOpen}>{isOpen ? 'Hide' : 'Show'} comments</button>
               {this.getBody()}
+              <CommentForm/>
           </div>);
     }
+
+    //addComment = comment => {
+    //  this.setState({
+    //      comments: this.comments.push({
+    //          id: Math.random(),
+    //          text: comment
+    //      })
+    //  })
+    //};
 
     getContainerRef = (ref) => {
         this.container = ref;

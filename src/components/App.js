@@ -3,6 +3,8 @@ import ArticleList from './ArticleList/index';
 import Chart from './Chart';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
+import DayPicker from 'react-day-picker';
+import 'react-day-picker/lib/style.css';
 
 class App extends Component {
   static propTypes = {
@@ -30,6 +32,7 @@ class App extends Component {
 
     return (
       <div>
+        <DayPicker month={new Date(2018, 9)}/>
         <Select name="test-select" options={options} value={this.state.selected} onChange={this.handleSelectChange} multi={true}/>
         Enter your name: <input type="text" value={this.state.text} onChange={this.handleTextChange}/>
         <ArticleList articles={this.props.articles}/>
