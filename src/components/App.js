@@ -1,19 +1,16 @@
 import React, {Component, PropTypes} from 'react';
 import ArticleList from './ArticleList/index';
 import Chart from './Chart';
-import Select from 'react-select';
-import 'react-select/dist/react-select.css';
-import DayPicker from 'react-day-picker';
-import 'react-day-picker/lib/style.css';
+import Filters from './Filters/index';
 
 class App extends Component {
   static propTypes = {
     articles: PropTypes.array.isRequired
   };
 
-  //state = {
-  //  text: ''
-  //};
+  state = {
+    text: ''
+  };
 
   constructor() {
     super();
@@ -25,18 +22,14 @@ class App extends Component {
   }
 
   render() {
-    const options = this.props.articles.map(article => ({
-      value: article.id,
-      label: article.title
-    }));
+    const {articles} = this.props;
 
     return (
       <div>
-        <DayPicker month={new Date(2018, 9)}/>
-        <Select name="test-select" options={options} value={this.state.selected} onChange={this.handleSelectChange} multi={true}/>
         Enter your name: <input type="text" value={this.state.text} onChange={this.handleTextChange}/>
-        <ArticleList articles={this.props.articles}/>
-        <Chart articles={this.props.articles}/>
+        <Filters articles={articles}/>
+        <ArticleList articles={articles}/>
+        <Chart articles={articles}/>
       </div>
     );
   };
@@ -52,10 +45,6 @@ class App extends Component {
       text: text
     });
   };
-
-  handleSelectChange = selected => {
-    this.setState({selected});
-  }
 }
 
 export default App;
