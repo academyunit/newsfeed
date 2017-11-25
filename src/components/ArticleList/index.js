@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
 import Article from './../Article/index';
 import accordion from '../../decorators/accordion';
 import CSSTransition from 'react-addons-css-transition-group'
@@ -34,4 +35,10 @@ ArticleList.propTypes = {
     toggleOpenItem: PropTypes.func.isRequired
 };
 
-export default accordion(ArticleList);
+const mapPropsToState = (state) => {
+  return {
+    articles: state.articles
+  };
+};
+
+export default connect(mapPropsToState)(accordion(ArticleList));
