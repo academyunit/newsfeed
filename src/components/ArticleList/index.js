@@ -19,7 +19,7 @@ class ArticleList extends Component {
           <CSSTransition component="ul"
                          transitionName="article-list"
                          transitionAppear={true}
-                         transitionAppearTimeout={10000}
+                         transitionAppearTimeout={100}
                          transitionEnterTimeout={500}
                          transitionLeaveTimeout={300}
           >
