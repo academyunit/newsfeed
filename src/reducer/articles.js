@@ -9,5 +9,5 @@ export default (state = articles, action) => {
       return state.filter((article) => article.id != payload.id);
   }
 
-  return articles;
+  return state;
 }
