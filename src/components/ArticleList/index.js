@@ -35,9 +35,17 @@ ArticleList.propTypes = {
     toggleOpenItem: PropTypes.func.isRequired
 };
 
-const mapPropsToState = (state) => {
+const mapPropsToState = ({articles, filters}) => {
+  const { selected, dateRange: {from, to} } = filters;
+
+  const filteredArticles = articles.filter(article => {
+    const published = Date.parse(article.date);
+    return (!selected.length || selected.includes(article.id) &&
+        (!from || !to || (published > from && published < to)));
+  });
+
   return {
-    articles: state.articles
+    articles: filteredArticles
   };
 };
 
