@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
+import {createFindCommentSelector} from '../selectors/index';
 
 function Comment (props) {
     const {user, text} = props.comment;
@@ -20,10 +21,14 @@ Comment.propTypes = {
 };
 
 const mapStateToProps = (state, props) => {
-  const { id } = props;
-  return {
-    comment: state.comments.find(comment => comment.id == id)
-  }
+  //console.log('searching comment...');
+  const findCommentSelector = createFindCommentSelector();
+
+  return (state, props) => {
+    return {
+      comment: findCommentSelector(state, props)
+    };
+  };
 };
 
 export default connect(mapStateToProps, {})(Comment);
