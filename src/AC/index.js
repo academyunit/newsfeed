@@ -1,11 +1,9 @@
 import {INCREMENT, DELETE_ARTICLE, CHANGE_SELECTION, CHANGE_DATE_RANGE} from '../constants';
 
 export function increment() {
-  const action = {
+  return {
     type: INCREMENT
   };
-
-  return action;
 }
 
 export function deleteArticle(id) {

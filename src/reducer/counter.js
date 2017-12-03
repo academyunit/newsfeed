@@ -1,4 +1,4 @@
-import {INCREMENT} from '../AC/index';
+import {INCREMENT} from '../constants';
 
 export default (count = 0, action) => {
   const {type} = action;
@@ -7,5 +7,6 @@ export default (count = 0, action) => {
     case INCREMENT:
       count = count + 1;
   }
+
   return count;
 }

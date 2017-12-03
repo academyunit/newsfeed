@@ -19,14 +19,13 @@ class Counter extends Component {
   handleIncrement = ev => {
     ev.preventDefault();
 
-    this.props.dispatchIncrement();
+    const {increment} = this.props;
+    increment();
   };
 }
 
 export default connect(state => ({
   count: state.count
 }),
-  {
-    dispatchIncrement: increment
-  }
+  { increment }
 )(Counter);
