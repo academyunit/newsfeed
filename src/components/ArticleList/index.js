@@ -2,11 +2,13 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import Article from './../Article/index';
 import accordion from '../../decorators/accordion';
-import CSSTransition from 'react-addons-css-transition-group'
+import CSSTransition from 'react-addons-css-transition-group';
+import {filteredArticlesSelector} from '../../selectors/index';
 import './style.css';
 
 class ArticleList extends Component {
     render() {
+      console.log('rendering ArticleList ...');
         const {articles, isItemOpened, toggleOpenItem} = this.props;
         const articleComponents = articles.map(article =>
           <li key={article.id}>
@@ -35,17 +37,9 @@ ArticleList.propTypes = {
     toggleOpenItem: PropTypes.func.isRequired
 };
 
-const mapPropsToState = ({articles, filters}) => {
-  const { selected, dateRange: {from, to} } = filters;
-
-  const filteredArticles = articles.filter(article => {
-    const published = Date.parse(article.date);
-    return (!selected.length || selected.includes(article.id) &&
-        (!from || !to || (published > from && published < to)));
-  });
-
+const mapPropsToState = (state) => {
   return {
-    articles: filteredArticles
+    articles: filteredArticlesSelector(state)
   };
 };
 
