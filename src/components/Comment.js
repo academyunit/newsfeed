@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
 
 function Comment (props) {
     const {user, text} = props.comment;
@@ -18,4 +19,11 @@ Comment.propTypes = {
   }).isRequired
 };
 
-export default Comment;
+const mapStateToProps = (state, props) => {
+  const { id } = props;
+  return {
+    comment: state.comments.find(comment => comment.id == id)
+  }
+};
+
+export default connect(mapStateToProps, {})(Comment);
