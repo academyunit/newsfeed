@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import Article from './../Article/index';
+import Loader from '../Loader';
 import accordion from '../../decorators/accordion';
 import CSSTransition from 'react-addons-css-transition-group';
 import {filteredArticlesSelector} from '../../selectors/index';
@@ -9,7 +10,13 @@ import './style.css';
 class ArticleList extends Component {
     render() {
       console.log('rendering ArticleList ...');
-        const {articles, isItemOpened, toggleOpenItem} = this.props;
+        const {articles, error, loading, isItemOpened, toggleOpenItem} = this.props;
+        if (error) {
+          return <h1>{error}</h1>;
+        }
+        if (loading) {
+          return <Loader />
+        }
         const articleComponents = articles.map(article =>
           <li key={article.id}>
               <Article article={article}
@@ -39,7 +46,9 @@ ArticleList.propTypes = {
 
 const mapPropsToState = (state) => {
   return {
-    articles: filteredArticlesSelector(state)
+    articles: filteredArticlesSelector(state),
+    loading: state.articles.loading,
+    error: state.articles.error
   };
 };
 

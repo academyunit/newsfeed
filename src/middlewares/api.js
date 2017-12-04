@@ -1,4 +1,4 @@
-import {SUCCESS, FAIL} from '../constants';
+import {SUCCESS, FAIL, START} from '../constants';
 import $ from 'jquery';
 
 export default store => next => action => {
@@ -7,6 +7,10 @@ export default store => next => action => {
   if (!callAPI) {
     return next(action);
   }
+
+  next({
+    ...rest, type: type + START
+  });
 
   // api call
   setTimeout(() => {
