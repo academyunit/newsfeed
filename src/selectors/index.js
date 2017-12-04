@@ -1,6 +1,6 @@
 import {createSelector} from 'reselect';
 
-const getArticles = state => state.articles;
+const getArticles = state => state.articles.entities;
 const getFilters = state => state.filters;
 const getComments = state => state.comments;
 const getId = (state, props) => props.id;
