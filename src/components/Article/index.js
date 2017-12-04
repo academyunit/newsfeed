@@ -13,7 +13,7 @@ class Article extends Component {
     const body = isOpen
       ? <section className="post__content">
       {article.text}
-      <CommentList comments={article.comments} ref={this.getCommentsList}/>
+      <CommentList article={article} ref={this.getCommentsList}/>
     </section>
       : '';
 

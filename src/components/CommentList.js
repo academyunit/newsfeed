@@ -4,12 +4,8 @@ import toggleOpen from '../decorators/toggleOpen';
 import NewCommentForm from './NewCommentForm';
 
 class CommentList extends Component {
-    static defaultProps = {
-        comments: []
-    };
-
     static propTypes = {
-        comments: PropTypes.array.isRequired
+        article: PropTypes.object.isRequired
     };
 
     componentWillMount() {
@@ -41,18 +37,8 @@ class CommentList extends Component {
               <h2>Comments</h2>
               <button onClick={toggleOpen}>{isOpen ? 'Hide' : 'Show'} comments</button>
               {this.getBody()}
-              <NewCommentForm/>
           </div>);
     }
-
-    //addComment = comment => {
-    //  this.setState({
-    //      comments: this.comments.push({
-    //          id: Math.random(),
-    //          text: comment
-    //      })
-    //  })
-    //};
 
     getContainerRef = (ref) => {
         this.container = ref;
@@ -68,19 +54,20 @@ class CommentList extends Component {
             return '';
         }
 
-        const {comments} = this.props;
-        if (!comments.length) {
+        const {article} = this.props;
+        if (!article.comments || !article.comments.length) {
             return (<div>
                 <h3>No comments yet</h3>
             </div>);
         }
 
-        const commentItems = comments.map(id => <li key={id}><Comment id={id}/></li>);
+        const commentItems = article.comments.map(id => <li key={id}><Comment id={id}/></li>);
         return (
           <div>
               <ul>
                   {commentItems}
               </ul>
+              <NewCommentForm articleId={article.id}/>
           </div>
         );
     }

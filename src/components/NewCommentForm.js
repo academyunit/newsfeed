@@ -1,9 +1,11 @@
 import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
+import {addComment} from '../AC/index';
 
 class NewCommentForm extends Component {
   static propTypes = {
-    user: PropTypes.string,
-    text: PropTypes.string
+    articleId: PropTypes.string.isRequired,
+    addComment: PropTypes.func.isRequired
   };
 
   state = {
@@ -26,6 +28,8 @@ class NewCommentForm extends Component {
 
   handleSubmit = ev => {
     ev.preventDefault();
+    const {articleId, addComment} = this.props;
+    addComment(this.state, articleId);
     this.setState({
       user: '',
       text: ''
@@ -35,7 +39,6 @@ class NewCommentForm extends Component {
   handleChange = field => ev => {
     const {value} = ev.target;
 
-    console.log(value);
     if (!validators[field](value)) {
       return;
     }
@@ -51,4 +54,4 @@ const validators = {
   user: (value) => value.length < 10
 };
 
-export default NewCommentForm;
+export default connect(null, {addComment})(NewCommentForm);
