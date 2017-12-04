@@ -35,5 +35,5 @@ class SelectFilter extends Component {
 
 export default connect(state => ({
   selected: state.filters.selected,
-  articles: state.articles
+  articles: state.articles.valueSeq().toArray()
 }), { changeSelection })(SelectFilter);
