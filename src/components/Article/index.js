@@ -1,18 +1,27 @@
 import React, {Component, PropTypes} from 'react';
 import {findDOMNode} from 'react-dom';
 import CommentList from './../CommentList';
+import Loader from '../Loader';
 import toggleOpen from '../../decorators/toggleOpen';
 import CSSTransition from 'react-addons-css-transition-group';
 import {connect} from 'react-redux';
-import {deleteArticle} from '../../AC/index';
+import {deleteArticle, loadArticleById} from '../../AC/index';
 import './style.css';
 
 class Article extends Component {
+
+  componentWillReceiveProps({isOpen, article, loadArticleById}) {
+    if (!this.props.isOpen && isOpen && !article.text && !article.loading) {
+      loadArticleById(article.id);
+    }
+  }
+
   render() {
     const {article, isOpen, toggleOpen} = this.props;
     const body = isOpen
       ? <section className="post__content">
       {article.text}
+      {article.loading && <Loader/>}
       <CommentList article={article} ref={this.getCommentsList}/>
     </section>
       : '';
@@ -58,4 +67,4 @@ Article.propTypes = {
   toggleOpen: PropTypes.func
 };
 
-export default connect(null, { deleteArticle })(Article);
+export default connect(null, { deleteArticle, loadArticleById })(Article);
