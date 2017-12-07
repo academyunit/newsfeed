@@ -1,6 +1,8 @@
 import React, {Component, PropTypes} from 'react';
+import {HashRouter as Router, Route, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
 import ArticleList from './ArticleList/index';
+import NotFound from './NotFound';
 import Chart from './Chart';
 import Filters from './Filters/index';
 import Counter from './Counter';
@@ -29,13 +31,17 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <Counter/>
-        Enter your name: <input type="text" value={this.state.text} onChange={this.handleTextChange}/>
-        <Filters articles={[]}/>
-        <ArticleList/>
-        <Chart/>
-      </div>
+      <Router>
+        <div>
+          Enter your name: <input type="text" value={this.state.text} onChange={this.handleTextChange}/>
+          <Switch>
+            <Route path="/counter" component={Counter} />
+            <Route path="/filters" component={Filters} />
+            <Route path="/articles" component={ArticleList} />
+            <Route path="*" component={NotFound} />
+          </Switch>
+        </div>
+      </Router>
     );
   };
 
