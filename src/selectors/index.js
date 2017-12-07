@@ -2,7 +2,7 @@ import {createSelector} from 'reselect';
 
 const getArticles = state => state.articles.entities;
 const getFilters = state => state.filters;
-const getComments = state => state.comments;
+const getComments = state => state.comments.entities;
 const getId = (state, props) => props.id;
 
 export const filteredArticlesSelector = createSelector(getArticles, getFilters, getFilteredArticles);
