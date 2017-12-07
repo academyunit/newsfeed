@@ -10,8 +10,8 @@ import './style.css';
 
 class Article extends Component {
 
-  componentWillReceiveProps({isOpen, article, loadArticleById}) {
-    if (!this.props.isOpen && isOpen && !article.text && !article.loading) {
+  componentWillReceiveProps({article, loadArticleById}) {
+    if (!article.text && !article.loading) {
       loadArticleById(article.id);
     }
   }
