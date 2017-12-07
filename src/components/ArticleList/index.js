@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Article from './../Article/index';
 import Loader from '../Loader';
@@ -10,7 +11,7 @@ import './style.css';
 class ArticleList extends Component {
     render() {
       console.log('rendering ArticleList ...');
-        const {articles, error, loading, isItemOpened, toggleOpenItem} = this.props;
+        const {articles, error, loading, isItemOpened, toggleOpenItem, match} = this.props;
         if (error) {
           return <h1>{error}</h1>;
         }
@@ -19,9 +20,7 @@ class ArticleList extends Component {
         }
         const articleComponents = articles.map(article =>
           <li key={article.id}>
-              <Article article={article}
-                       isOpen={isItemOpened(article.id)}
-                       toggleOpen={toggleOpenItem(article.id)}/>
+             <Link to={`${match.url}/${article.id}`}>{article.title}</Link>
           </li>);
 
         return (

@@ -18,6 +18,9 @@ class Article extends Component {
 
   render() {
     const {article, isOpen, toggleOpen} = this.props;
+    if (!article) {
+      return null;
+    }
     const body = isOpen
       ? <section className="post__content">
       {article.text}
@@ -62,9 +65,15 @@ Article.propTypes = {
     title: PropTypes.string.isRequired,
     text: PropTypes.string,
     comments: PropTypes.array
-  }).isRequired,
+  }),
   isOpen: PropTypes.bool,
   toggleOpen: PropTypes.func
 };
 
-export default connect(null, { deleteArticle, loadArticleById })(Article);
+function mapStateToProps(state, {match}) {
+  return {
+    article: state.articles.getIn(['entities', match.params.id])
+  }
+}
+
+export default connect(mapStateToProps, { deleteArticle, loadArticleById })(Article);
