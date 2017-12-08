@@ -6,6 +6,7 @@ import NotFound from './NotFound';
 import Chart from './Chart';
 import Filters from './Filters/index';
 import Counter from './Counter';
+import Menu, {MenuItem} from './Menu/index';
 import {loadAllArticles} from '../AC/index';
 
 class App extends Component {
@@ -34,6 +35,11 @@ class App extends Component {
       <Router>
         <div>
           Enter your name: <input type="text" value={this.state.text} onChange={this.handleTextChange}/>
+          <Menu>
+            <MenuItem path="/counter"/>
+            <MenuItem path="/filters"/>
+            <MenuItem path="/articles"/>
+          </Menu>
           <Switch>
             <Route path="/counter" component={Counter} />
             <Route path="/filters" component={Filters} />
