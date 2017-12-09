@@ -1,4 +1,4 @@
-import {INCREMENT, DELETE_ARTICLE, CHANGE_SELECTION, CHANGE_DATE_RANGE, ADD_COMMENT,
+import {INCREMENT, DELETE_ARTICLE, CHANGE_SELECTION, CHANGE_DATE_RANGE, ADD_COMMENT, LOAD_COMMENTS_FOR_PAGE,
   LOAD_ALL_ARTICLES, LOAD_ARTICLE_BY_ID, LOAD_ARTICLE_COMMENTS, START, SUCCESS, FAIL} from '../constants';
 import $ from 'jquery';
 
@@ -90,5 +90,13 @@ export function checkAndLoadArticleComments(articleId) {
         }))
       ;
     }, 1000);
+  };
+}
+
+export function loadCommentsForPage(page) {
+  return {
+    type: LOAD_COMMENTS_FOR_PAGE,
+    payload: { page },
+    callAPI: `/api/comment?limit=5&offset=${(page - 1) * 5}`
   };
 }

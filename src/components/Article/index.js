@@ -6,6 +6,7 @@ import toggleOpen from '../../decorators/toggleOpen';
 import CSSTransition from 'react-addons-css-transition-group';
 import {connect} from 'react-redux';
 import {deleteArticle, loadArticleById} from '../../AC/index';
+import {articleByIdSelector} from '../../selectors/index';
 import './style.css';
 
 class Article extends Component {
@@ -72,7 +73,7 @@ Article.propTypes = {
 
 function mapStateToProps(state, {match}) {
   return {
-    article: state.articles.getIn(['entities', match.params.id])
+    article: articleByIdSelector(state, match.params)
   }
 }
 

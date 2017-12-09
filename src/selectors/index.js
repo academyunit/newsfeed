@@ -14,6 +14,8 @@ export const createFindCommentSelector = () => createSelector(getComments, getId
   }
 );
 
+export const articleByIdSelector = createSelector(getArticles, getId, (entities, id) => entities.get(id));
+
 function getFilteredArticles(articles, filters) {
   console.log('calculating filtering...');
   const { selected, dateRange: {from, to} } = filters;
