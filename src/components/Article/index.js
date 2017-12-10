@@ -10,6 +10,9 @@ import {articleByIdSelector} from '../../selectors/index';
 import './style.css';
 
 class Article extends Component {
+  static contextTypes = {
+    user: PropTypes.string
+  };
 
   componentWillMount() {
     this.checkAndLoad(this.props);
@@ -32,6 +35,7 @@ class Article extends Component {
     }
     const body = isOpen
       ? <section className="post__content">
+      <p>User: {this.context.user}</p>
       {article.text}
       {article.loading && <Loader/>}
       <CommentList article={article} ref={this.getCommentsList}/>

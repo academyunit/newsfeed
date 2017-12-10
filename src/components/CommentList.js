@@ -11,6 +11,10 @@ class CommentList extends Component {
         article: PropTypes.object.isRequired
     };
 
+    static contextTypes = {
+        user: PropTypes.string
+    };
+
     componentWillMount() {
         //console.log('CommentList componentWillMount()');
     }
@@ -39,6 +43,7 @@ class CommentList extends Component {
     }
 
     render() {
+        console.log('--' , 5);
         const {isOpen, toggleOpen} = this.props;
 
         return (
@@ -75,6 +80,7 @@ class CommentList extends Component {
         const commentItems = article.comments.map(id => <li key={id}><Comment id={id}/></li>);
         return (
           <div>
+              User: {this.context.user}
               <ul>
                   {commentItems}
               </ul>
@@ -86,4 +92,4 @@ class CommentList extends Component {
 
 export default connect((state, props) => ({
     loaded: state.articles.getIn(['entities', props.article.id, 'commentsLoaded'])
-}), {checkAndLoadArticleComments})(toggleOpen(CommentList))
+}), {checkAndLoadArticleComments}, null, {pure: false})(toggleOpen(CommentList))

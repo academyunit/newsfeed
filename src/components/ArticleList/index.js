@@ -9,6 +9,9 @@ import {filteredArticlesSelector} from '../../selectors/index';
 import './style.css';
 
 class ArticleList extends Component {
+  static contextTypes = {
+    user: PropTypes.string
+  };
     render() {
       console.log('rendering ArticleList ...');
         const {articles, error, loading, isItemOpened, toggleOpenItem, match} = this.props;
@@ -24,15 +27,18 @@ class ArticleList extends Component {
           </li>);
 
         return (
-          <CSSTransition component="ul"
-                         transitionName="article-list"
-                         transitionAppear={true}
-                         transitionAppearTimeout={100}
-                         transitionEnterTimeout={500}
-                         transitionLeaveTimeout={300}
-          >
-            {articleComponents}
-          </CSSTransition>
+          <div>
+            <h3>User: {this.context.user}</h3>
+            <CSSTransition component="ul"
+                           transitionName="article-list"
+                           transitionAppear={true}
+                           transitionAppearTimeout={100}
+                           transitionEnterTimeout={500}
+                           transitionLeaveTimeout={300}
+            >
+              {articleComponents}
+            </CSSTransition>
+          </div>
         );
     };
 }
