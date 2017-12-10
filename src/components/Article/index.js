@@ -11,7 +11,15 @@ import './style.css';
 
 class Article extends Component {
 
-  componentWillReceiveProps({article, loadArticleById}) {
+  componentWillMount() {
+    this.checkAndLoad(this.props);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.checkAndLoad(nextProps);
+  }
+
+  checkAndLoad({article, loadArticleById}) {
     if (!article.text && !article.loading) {
       loadArticleById(article.id);
     }
