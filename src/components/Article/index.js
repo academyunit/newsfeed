@@ -19,9 +19,9 @@ class Article extends Component {
     this.checkAndLoad(nextProps);
   }
 
-  checkAndLoad({article, loadArticleById}) {
-    if (!article.text && !article.loading) {
-      loadArticleById(article.id);
+  checkAndLoad({article, loadArticleById, match}) {
+    if (!article || (!article.text && !article.loading)) {
+      loadArticleById(match.params.id);
     }
   }
 
@@ -71,7 +71,7 @@ class Article extends Component {
 
 Article.propTypes = {
   article: PropTypes.shape({
-    title: PropTypes.string.isRequired,
+    title: PropTypes.string,
     text: PropTypes.string,
     comments: PropTypes.array
   }),
